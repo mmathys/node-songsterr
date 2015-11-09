@@ -1,0 +1,29 @@
+{
+  "name": "songsterr-node",
+  "version": "1.0.0",
+  "description": "Unofficial extended Songsterr API Client for Node.js",
+  "main": "songsterr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmathys/node-songsterr.git"
+  },
+  "keywords": [
+    "songsterr",
+    "node",
+    "api"
+  ],
+  "author": "Max Mathys",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmathys/node-songsterr/issues"
+  },
+  "homepage": "https://github.com/mmathys/node-songsterr#readme",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "debug": "^2.2.0",
+    "request": "^2.65.0"
+  }
+}
