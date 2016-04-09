@@ -62,3 +62,45 @@ module.exports.getTabByRevisionId = function (revisionId, callback) {
 module.exports.isSongsterrTab = function (url) {
   return /http:\/\/www.songsterr.com\/a\/wsa\/.+s\d+t\d+/i.test(url)
 }
+
+module.exports.getLatestSongId = function(callback) {
+  var newestUrl = "http://www.songsterr.com/a/wa/all?inst=any&sort=d"
+
+  debug('retrieving latest song id from url')
+
+  request(newestUrl, function (error, response, html) {
+    if (!error && response.statusCode == 200) {
+      var $ = cheerio.load(html)
+
+      var links = $('.tab-link');
+
+      if(!links || links.length == 0) {
+        callback(error ? error : 'Error on latest tab id')
+        return;
+      }
+
+      var latestSongId = -1;
+
+      links.each(function(i, elem){
+        var href = $(this).attr('href');
+        var id = /\d+(?=t\d$)/i.exec(href)
+        if(id && parseInt(id)){
+          latestSongId = parseInt(id) > latestSongId ? parseInt(id) : latestSongId;
+        }
+      })
+
+      if(latestSongId == -1) {
+        callback(error ? error : 'Error on latest tab id')
+      } else {
+        callback(null, latestSongId)
+      }
+
+
+    } else {
+      callback(error ? error : 'Error on latest tab id')
+      return -1;
+    }
+  });
+
+
+}
