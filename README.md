@@ -5,25 +5,31 @@ This package provides simplified access to public tab data of [Songsterr](//www.
 
 ## Documentation
 
-*Get tab info by url*
+*Get tab info by url* responds with tabInfo
 
 ```javascript
 getTabByUrl: function (url, callback)
 ```
 
-*Get tab info by revision id*
+*Get tab info by revision id* responds with tabInfo
 
 ```javascript
 getTabByRevisionId: function (url, callback)
 ```
 
+*Get Latest Song Id* responds with Integer
+
+```javascript
+getLatestSongId: function (callback)
+```
+
 *`callback` format*
 
 ```javascript
-function (error, tabInfo)
+function (error, response)
 ```
 
-*sample `tabInfo`*
+*sample `tabInfo`* as `response` in callback
 
 ```js
 { title: 'Canon In C',
