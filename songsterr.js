@@ -10,7 +10,7 @@ module.exports.getTabByUrl = function (url, callback) {
       // find regex in ...&revision=260350&demoSong...
       var revisionId = /\d+(?=&demoSong)/i.exec(html)
 
-      if (revisionId[0]) {
+      if (revisionId && revisionId[0]) {
         debug('Successfully retrieved revision id:', revisionId[0])
         module.exports.getTabByRevisionId(revisionId[0], callback)
       } else {
