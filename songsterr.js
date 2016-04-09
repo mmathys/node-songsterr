@@ -14,10 +14,12 @@ module.exports.getTabByUrl = function (url, callback) {
         debug('Successfully retrieved revision id:', revisionId[0])
         module.exports.getTabByRevisionId(revisionId[0], callback)
       } else {
-        callback('No match for revision id in page source. exiting now')
+        callback({status:'error', error:error, message:'No match for revision id in page source. exiting now'})
       }
+    } else if(response.statusCode == 404) {
+      callback({status:'not found', error:error, message: "This tab does not exist"})
     } else {
-      callback(error ? error : 'Error on retrieving revisionId')
+      callback({status:'error', error:error, message:'Error on retrieving revisionId'})
     }
   })
 }
@@ -54,13 +56,14 @@ module.exports.getTabByRevisionId = function (revisionId, callback) {
       })
 
     } else {
-      callback(error ? error : 'Error on getting tab details')
+      callback({status:'error', error:error, message:'Error on tab details'})
     }
   })
 }
 
-module.exports.isSongsterrTab = function (url) {
-  return /http:\/\/www.songsterr.com\/a\/wsa\/.+s\d+t\d+/i.test(url)
+module.exports.isSongsterrTab = function (url, callback) {
+  var validFormat = /http:\/\/www.songsterr.com\/a\/wsa\/.+s\d+t\d+/i.test(url)
+  callback(null, validFormat);
 }
 
 module.exports.getLatestSongId = function(callback) {
@@ -75,7 +78,7 @@ module.exports.getLatestSongId = function(callback) {
       var links = $('.tab-link');
 
       if(!links || links.length == 0) {
-        callback(error ? error : 'Error on latest tab id')
+        callback({status:'error', error:error, message:'Error on getting latest tab id'})
         return;
       }
 
@@ -90,17 +93,29 @@ module.exports.getLatestSongId = function(callback) {
       })
 
       if(latestSongId == -1) {
-        callback(error ? error : 'Error on latest tab id')
+        callback({status:'error', error:error, message:'Error on latest tab id'})
       } else {
         callback(null, latestSongId)
       }
 
 
     } else {
-      callback(error ? error : 'Error on latest tab id')
+      callback({status:'error', error:error, message:'Error on latest tab id'})
       return -1;
     }
   });
+}
 
+module.exports.getTabBySongId = function(id, callback) {
+  var redirectUrl = "http://www.songsterr.com/a/wa/song?id="+id;
+  //TODO
+  request(redirectUrl, function (error, response, html) {
+    var redirect = response.request.uri.href;
+    if(redirect){
+      module.exports.getTabByUrl(redirect, callback);
+    }else{
+      callback({status:'error', error:error, message:'Could not get redirect. Wrong id?'})
+    }
+  });
 
 }

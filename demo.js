@@ -6,7 +6,18 @@ var test = songsterr.getTabByUrl("http://www.songsterr.com/a/wsa/pachelbel-canon
 })
 */
 
-var test = songsterr.getLatestSongId(function(err, res){
+/* Works
+songsterr.getTabBySongId(90811, function(err, res){
+  console.log(err);
+
+  console.log(res);
+
+});
+
+*/
+
+/* doesn't work */
+songsterr.getTabBySongId(90812, function(err, res){
   console.log(err);
 
   console.log(res);

@@ -43,5 +43,5 @@ function (error, response)
 *Check if url is valid songsterr tab*
 
 ```javascript
-isSongsterrTab: function (url)
+isSongsterrTab: function (url, callback)
 ```
