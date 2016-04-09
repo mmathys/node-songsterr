@@ -16,7 +16,7 @@ module.exports.getTabByUrl = function (url, callback) {
       } else {
         callback({status:'error', error:error, message:'No match for revision id in page source. exiting now'})
       }
-    } else if(response.statusCode == 404) {
+    } else if(!response || response.statusCode == 404) {
       callback({status:'not found', error:error, message: "This tab does not exist"})
     } else {
       callback({status:'error', error:error, message:'Error on retrieving revisionId'})
