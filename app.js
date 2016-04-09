@@ -110,9 +110,6 @@ module.exports.getTabBySongId = function(id, callback) {
   var redirectUrl = "http://www.songsterr.com/a/wa/song?id="+id;
   //TODO
   request(redirectUrl, function (error, response, html) {
-    if(!response || !response.request || !response.request.uri) {
-      callback({status:'error', error:error, message:'Could not get redirect. Wrong id?'})
-    }
     var redirect = response.request.uri.href;
     if(redirect){
       module.exports.getTabByUrl(redirect, callback);
