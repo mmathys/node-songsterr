@@ -11,6 +11,12 @@ This package provides simplified access to public tab data of [Songsterr](//www.
 getTabByUrl: function (url, callback)
 ```
 
+*Get tab info by song id* responds with tabInfo
+
+```javascript
+getTabBySongId: function (url, callback)
+```
+
 *Get tab info by revision id* responds with tabInfo
 
 ```javascript
@@ -40,7 +46,8 @@ function (error, response)
   revisionId: '264243' }
 ```
 
-*Check if url is valid songsterr tab*
+*Check if url is valid songsterr tab*. Only check if the url has the correct
+format, not if the tab actually exists.
 
 ```javascript
 isSongsterrTab: function (url, callback)
