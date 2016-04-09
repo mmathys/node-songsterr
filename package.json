@@ -1,6 +1,6 @@
 {
   "name": "songsterr",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Unofficial extended Songsterr API Client for Node.js",
   "main": "songsterr.js",
   "scripts": {
