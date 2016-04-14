@@ -1,6 +1,8 @@
 # node-songsterr
 Unofficial extended Songsterr Client for Node.js
 
+[![NPM](https://nodei.co/npm/songsterr.png)](https://nodei.co/npm/songsterr/)
+
 This package provides simplified access to public tab data of [Songsterr](//www.songsterr.com).
 
 ## Documentation
